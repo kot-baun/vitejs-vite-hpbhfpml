@@ -1,43 +1,41 @@
 <template>
-<div class="content-wrapper">
 
-    <h3 class="form-title">Створити новий компонент</h3>
-    <form @submit.prevent="submitForm" class="request-form">
-      <div class="form-grid">
-        <div class="form-group">
-          <label for="department">Підрозділ:</label>
-          <input type="text" id="department" v-model="formData.department" required>
-        </div>
-        <div class="form-group">
-          <label for="executor">Екіпаж:</label>
-          <input type="text" id="executor" v-model="formData.executor" required>
-        </div>
-        <div class="form-group">
-          <label for="vehicle">Транспортний засіб:</label>
-          <input type="text" id="vehicle" v-model="formData.vehicle" required>
-        </div>
-        <div class="form-group">
-          <label for="timeBegin">Час початку:</label>
-          <input type="time" id="timeBegin" v-model="formData.timeBegin" required>
-        </div>
-        <div class="form-group">
-          <label for="timeEnd">Час закінчення:</label>
-          <input type="time" id="timeEnd" v-model="formData.timeEnd" required>
-        </div>
-        <div class="form-group">
-          <label for="weight">Вага:</label>
-          <input type="text" id="weight" v-model="formData.weight" required>
-        </div>
+  <h3 class="form-title">Створити новий компонент</h3>
+  <form @submit.prevent="submitForm" class="request-form">
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="department">Підрозділ:</label>
+        <input type="text" id="department" v-model="formData.department" required>
       </div>
-      <div class="form-group route-group">
-        <label for="route">Маршрут:</label>
-        <input type="text" id="route" v-model="formData.route" required>
+      <div class="form-group">
+        <label for="executor">Екіпаж:</label>
+        <input type="text" id="executor" v-model="formData.executor" required>
       </div>
-      <div class="form-actions">
-        <button type="submit" class="submit-button">Створити</button>
+      <div class="form-group">
+        <label for="vehicle">Транспортний засіб:</label>
+        <input type="text" id="vehicle" v-model="formData.vehicle" required>
       </div>
-    </form>
-  </div>
+      <div class="form-group">
+        <label for="timeBegin">Час початку:</label>
+        <input type="time" id="timeBegin" v-model="formData.timeBegin" required>
+      </div>
+      <div class="form-group">
+        <label for="timeEnd">Час закінчення:</label>
+        <input type="time" id="timeEnd" v-model="formData.timeEnd" required>
+      </div>
+      <div class="form-group">
+        <label for="weight">Вага:</label>
+        <input type="text" id="weight" v-model="formData.weight" required>
+      </div>
+    </div>
+    <div class="form-group route-group">
+      <label for="route">Маршрут:</label>
+      <input type="text" id="route" v-model="formData.route" required>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="submit-button">Створити</button>
+    </div>
+  </form>
 </template>
 
 <script>

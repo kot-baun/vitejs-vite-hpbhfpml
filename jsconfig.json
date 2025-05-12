@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "jsx": "preserve",
+    "checkJs": false // Disable JavaScript type checking
+  },
+  "include": ["src/**/*.js", "src/**/*.vue"],
+  "exclude": ["node_modules"]
+}

@@ -1,5 +1,4 @@
 <template>
-<div class="content-wrapper">
 
   <div class="chat-container">
     <div class="contacts-column">
@@ -7,18 +6,13 @@
         <h3>Contacts</h3>
       </div>
       <ul class="contacts-list">
-        <li
-          v-for="contact in contacts"
-          :key="contact.id"
-          :class="[
-            'contact-item',
-            {
-              'contact-active':
-                selectedContact && selectedContact.id === contact.id,
-            },
-          ]"
-          @click="selectContact(contact)"
-        >
+        <li v-for="contact in contacts" :key="contact.id" :class="[
+          'contact-item',
+          {
+            'contact-active':
+              selectedContact && selectedContact.id === contact.id,
+          },
+        ]" @click="selectContact(contact)">
           <div class="contact-info">
             <span class="contact-name">{{ contact.name }}</span>
             <span class="contact-phone">{{ contact.phone }}</span>
@@ -33,35 +27,22 @@
           <h4>{{ selectedContact.name }}</h4>
         </div>
         <div class="messages-list">
-          <div
-            v-for="message in filteredMessages"
-            :key="message.id"
-            :class="[
-              'message-bubble',
-              message.sender === 'me' ? 'message-mine' : 'message-other',
-            ]"
-          >
+          <div v-for="message in filteredMessages" :key="message.id" :class="[
+            'message-bubble',
+            message.sender === 'me' ? 'message-mine' : 'message-other',
+          ]">
             <div class="message-content">
               {{ message.text }}
             </div>
-            <button
-              v-if="message.sender === 'other'"
-              class="process-button"
-              @click="handleProcessClick(message)"
-              title="Process Message"
-            >
+            <button v-if="message.sender === 'other'" class="process-button" @click="handleProcessClick(message)"
+              title="Process Message">
               ✨
             </button>
           </div>
         </div>
         <div class="chat-input-area">
-          <input
-            type="text"
-            v-model="newMessageText"
-            @keyup.enter="sendMessage"
-            placeholder="Type a message..."
-            class="message-input"
-          />
+          <input type="text" v-model="newMessageText" @keyup.enter="sendMessage" placeholder="Type a message..."
+            class="message-input" />
           <button @click="sendMessage" class="send-button">Send</button>
         </div>
       </div>
@@ -70,7 +51,6 @@
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script setup>
