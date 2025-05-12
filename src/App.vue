@@ -3,23 +3,23 @@
     <Modal :visible="isOpenRequest" @closeRequestModal="closeRequestModal" @createRequest="handleCreateRequest" />
     <div class="main-content">
       <div class="content-wrapper">
-
         <ChatComponent />
       </div>
     </div>
 
     <div class="main-content">
       <div class="content-wrapper">
-
         <CreateRequestForm @createRequest="handleCreateRequest" />
       </div>
     </div>
 
     <div class="main-content">
       <div class="content-wrapper">
-        <TabViewComponent :requests="requests" @update-status="handleStatusUpdate" @open-request-modal="openRequestModal" />
+        <TabViewComponent :requests="requests" @update-status="handleStatusUpdate"
+          @open-request-modal="openRequestModal" />
       </div>
     </div>
+
   </div>
 </template>
 
@@ -36,7 +36,7 @@ const requests = ref(initialRequests);
 
 const handleCreateRequest = (newRequest) => {
   console.log('New request created:', newRequest);
-  
+
   requests.value.push({
     id: requests.value.length + 1,
     ...newRequest,

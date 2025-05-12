@@ -1,37 +1,35 @@
 <template>
-
-  <h3 class="form-title">Створити новий компонент</h3>
+  <h3 class="form-title">Створити нову заявку</h3>
   <form @submit.prevent="submitForm" class="request-form">
-    <div class="form-grid">
-      <div class="form-group">
-        <label for="department">Підрозділ:</label>
-        <input type="text" id="department" v-model="formData.department" required>
-      </div>
-      <div class="form-group">
-        <label for="executor">Екіпаж:</label>
-        <input type="text" id="executor" v-model="formData.executor" required>
-      </div>
-      <div class="form-group">
-        <label for="vehicle">Транспортний засіб:</label>
-        <input type="text" id="vehicle" v-model="formData.vehicle" required>
-      </div>
-      <div class="form-group">
-        <label for="timeBegin">Час початку:</label>
-        <input type="time" id="timeBegin" v-model="formData.timeBegin" required>
-      </div>
-      <div class="form-group">
-        <label for="timeEnd">Час закінчення:</label>
-        <input type="time" id="timeEnd" v-model="formData.timeEnd" required>
-      </div>
-      <div class="form-group">
-        <label for="weight">Вага:</label>
-        <input type="text" id="weight" v-model="formData.weight" required>
-      </div>
-    </div>
-    <div class="form-group route-group">
-      <label for="route">Маршрут:</label>
-      <input type="text" id="route" v-model="formData.route" required>
-    </div>
+    <FormSection>
+      <FormGroup label="Підрозділ:" id="department" v-model="formData.department" required />
+      <FormGroup label="Екіпаж:" id="executor" v-model="formData.executor" required />
+      <FormGroup label="Засіб:" id="vehicleType" v-model="formData.vehicleType" required />
+    </FormSection>
+
+    <FormSection>
+      <FormGroup label="Частота управління:" id="frequencyControl" v-model="formData.frequencyControl" required />
+      <FormGroup label="Частота відео:" id="frequencyVideo" v-model="formData.frequencyVideo" required />
+      <FormGroup label="Додаткові частоти:" id="additionalFrequencies" v-model="formData.additionalFrequencies" />
+    </FormSection>
+
+    <FormSection>
+      <FormGroup label="Висота:" id="altitude" v-model="formData.altitude" required />
+      <FormGroup label="Час початку:" id="timeBegin" v-model="formData.timeBegin" type="time" required />
+      <FormGroup label="Час закінчення:" id="timeEnd" v-model="formData.timeEnd" type="time" required />
+    </FormSection>
+
+    <FormSection>
+      <FormGroup label="Точка зльоту:" id="takeoffPoint" v-model="formData.takeoffPoint" required />
+      <FormGroup label="Проходження ЛБЗ:" id="lbzPassage" v-model="formData.lbzPassage" />
+      <FormGroup label="Маршрут:" id="route" v-model="formData.route" required />
+    </FormSection>
+
+    <FormSection>
+      <FormGroup label="Контакти:" id="contacts" v-model="formData.contacts" required />
+      <FormGroup label="Додатково:" id="additionalInfo" v-model="formData.additionalInfo" type="textarea" />
+    </FormSection>
+
     <div class="form-actions">
       <button type="submit" class="submit-button">Створити</button>
     </div>
@@ -39,19 +37,30 @@
 </template>
 
 <script>
+import FormSection from './FormSection.vue';
+import FormGroup from './FormGroup.vue';
+
 export default {
+  components: { FormSection, FormGroup },
   data() {
     return {
       formData: {
         department: '',
         executor: '',
-        vehicle: '',
+        vehicleType: '',
+        frequencyControl: '',
+        frequencyVideo: '',
+        additionalFrequencies: '',
         timeBegin: '',
         timeEnd: '',
-        weight: '',
+        altitude: '',
+        takeoffPoint: '',
+        lbzPassage: '',
         route: '',
-      }
-    }
+        contacts: '',
+        additionalInfo: '',
+      },
+    };
   },
   emits: ['createRequest'],
   methods: {
@@ -59,89 +68,30 @@ export default {
       const newRequest = {
         ...this.formData,
         id: Date.now(),
-        status: 'сформована'
+        status: 'сформована',
       };
       this.$emit('createRequest', newRequest);
       this.resetForm();
     },
     resetForm() {
-      this.formData = {
-        department: '',
-        executor: '',
-        vehicle: '',
-        timeBegin: '',
-        timeEnd: '',
-        weight: '',
-        route: '',
-      };
-    }
-  }
+      Object.keys(this.formData).forEach((key) => (this.formData[key] = ''));
+    },
+  },
 };
 </script>
 
 <style scoped>
-.form-container {
-  background: white;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  padding: 1.5rem;
-  max-width: 100%;
-  margin: 1.5rem;
-}
-
 .form-title {
   font-size: 1.25rem;
   font-weight: 600;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   color: var(--color-gray-800);
 }
 
 .request-form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-}
-
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-}
-
-@media (max-width: 500px) {
-  .form-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.form-group label {
-  font-size: 0.9rem;
-  color: var(--color-gray-600);
-}
-
-.form-group input {
-  padding: 0.5rem;
-  border: 1px solid var(--color-gray-200);
-  border-radius: 0.25rem;
-  font-size: 1rem;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.form-group input:focus {
-  outline: none;
-  border-color: var(--color-blue-500);
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
-}
-
-.route-group {
-  margin-top: 0.5rem;
+  /* gap: 1rem; */
 }
 
 .form-actions {
