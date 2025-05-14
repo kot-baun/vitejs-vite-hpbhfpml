@@ -1,18 +1,15 @@
 <template>
-  <section class="form-section">
-    <h4 v-if="title" class="section-title">{{ title }}</h4>
-    <div class="section-content">
-      <slot></slot>
-    </div>
-  </section>
+  <div class="form-section" :style="{ gridTemplateColumns: columns }">
+    <slot></slot>
+  </div>
 </template>
 
 <script>
 export default {
   props: {
-    title: {
+    columns: {
       type: String,
-      default: '',
+      default: '1fr', // Значення за замовчуванням: перша колонка для підпису, друга для поля введення
     },
   },
 };
@@ -20,19 +17,10 @@ export default {
 
 <style scoped>
 .form-section {
-  margin-bottom: 0.3rem;
-}
-
-.section-title {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: var(--color-gray-700);
-}
-
-.section-content {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
+  display: grid;
+  grid-auto-flow: row; /* Елементи розташовуються в рядок */
+  gap: 1rem; /* Відступ між елементами */
+  align-items: center; /* Вирівнювання елементів по вертикалі */
+  width: 100%;
 }
 </style>
